@@ -319,7 +319,7 @@ jobs:
         cd redis-stack
         source .venv/bin/activate
         invoke package -o ${{env.osname}} -s ${{env.osnick}} -d ${{env.platform}} -a ${{env.arch}} -r ../redis/src -t zip -p redis-stack-server -k fetch
-        REQUEST_OUTPUT=`xcrun altool --notarize-app -f *.zip --primary-bundle-id org.redis.redis-stack-server -u ${{ secrets.MAC_NOTARIZE_USERNAME }} -p ${{secrets.MAC_NOTARIZE_PASSWORD }}``
+        REQUEST_OUTPUT=`xcrun altool --notarize-app -f *.zip --primary-bundle-id org.redis.redis-stack-server -u ${{ secrets.MAC_NOTARIZE_USERNAME }} -p ${{secrets.MAC_NOTARIZE_PASSWORD }}`
         UUID=`echo ${REQUEST_OUTPUT} | grep RequestUUID | cut -d '=' -f 2-2`
         xcrun altool --notarization-info ${UUID} -u ${{ secrets.MAC_NOTARIZE_USERNAME }} -p ${{ secrets.MAC_NOTARIZE_PASSWORD }}
         for i in `ls *.zip`; do
